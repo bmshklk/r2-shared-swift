@@ -170,12 +170,18 @@ public struct Locations: Equatable, Loggable {
     public var totalProgression: Double?
     /// An index in the publication.
     public var position: Int?
+    public var cssSelector: String?
+    public var partialCfi: String?
+    public var domRange: NSDictionary?
     
-    public init(fragments: [String] = [], progression: Double? = nil, totalProgression: Double? = nil, position: Int? = nil) {
+    public init(fragments: [String] = [], progression: Double? = nil, totalProgression: Double? = nil, position: Int? = nil, cssSelector: String? = nil, partialCfi: String? = nil, domRange: NSDictionary? = nil) {
         self.fragments = fragments
         self.progression = progression
         self.totalProgression = totalProgression
         self.position = position
+        self.cssSelector = cssSelector
+        self.partialCfi = partialCfi
+        self.domRange = domRange
     }
     
     public init(json: Any?) throws {
@@ -193,6 +199,9 @@ public struct Locations: Equatable, Loggable {
         self.progression = json["progression"] as? Double
         self.totalProgression = json["totalProgression"] as? Double
         self.position = json["position"] as? Int
+        self.cssSelector = json["cssSelector"] as? String
+        self.partialCfi = json["partialCfi"] as? String
+        self.domRange = json["domRange"] as? NSDictionary
     }
 
     public init(jsonString: String) {
@@ -214,7 +223,10 @@ public struct Locations: Equatable, Loggable {
             "fragments": encodeIfNotEmpty(fragments),
             "progression": encodeIfNotNil(progression),
             "totalProgression": encodeIfNotNil(totalProgression),
-            "position": encodeIfNotNil(position)
+            "position": encodeIfNotNil(position),
+            "cssSelector": encodeIfNotNil(cssSelector),
+            "partialCfi": encodeIfNotNil(partialCfi),
+            "domRange": encodeIfNotNil(domRange)
         ])
     }
     
